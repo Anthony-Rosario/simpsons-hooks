@@ -20,6 +20,14 @@ describe('simpsons quote generator', () => {
   beforeAll(() => server.listen());
   afterAll(() => server.close());
   it('should fetch a quote AFTER the button is pressed' , () => {
-    
+    render(<SimpsonsQuote />);
+
+    const button = screen.getByRole('button')
+    fireEvent.click(button);
+
+    return waitFor(() => {
+      screen.getByAltText('Homer');
+      screen.getByText('D\'ooahhhh');
+    })
   })
 })
